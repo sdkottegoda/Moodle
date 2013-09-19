@@ -23,147 +23,129 @@ package com.example.moodle;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 
 
 
-public class User implements Parcelable {
+public class User{
 	
-	private UserHome home;
+	private static User instance = null;
+	private String firstName, lastName, fullName, pictureUrl, userName, token;
+	private int id;
+	private ArrayList<String> functions;
 	
-	public User() {
-		home=new UserHome();
+	
+	//the user will only be created by the class
+	private User(){
+		
 	}
 	
-	public void setHome(UserHome info){
-		home=info;
+	public void setDetails(JSONObject obj){
+		try{
+			firstName = obj.getString("firstname");
+			lastName = obj.getString("lastname");
+			fullName = obj.getString("fullname");
+			pictureUrl = obj.getString("userpictureurl");
+			userName = obj.getString("username");
+			id = obj.getInt("userid");
+			functions = new ArrayList<String>();
+			JSONArray funcs = obj.getJSONArray("functions");
+			for (int i=0;i<funcs.length();i++){
+				functions.add(funcs.getString(i));
+			}
+		}
+		catch(JSONException e){
+			
+		}
 	}
 	
-	public UserHome getHome(){
-		return home;
+	public static User getInstance(){
+		if (instance==null){
+			instance = new User();
+		}
+			return instance;
+		
 	}
-
-	private String username;	
-	public void setUsername(String username) {
-       this.username = username;
-    }
-
+	
     public String getUsername() {
-       return username;
+       return userName;
     }
     
-    private String password;	
-	public void setPassword(String password) {
-       this.password = password;
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public boolean isCapable(String aFunc){
+    	return functions.contains("aFunc");
+    }
+    
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getPassword() {
-       return password;
+    public String getPicUrl() {
+       return pictureUrl;
     }
     
-    private String url;	
-	public void setUrl(String url) {
-       this.url = url;
-    }
-
-    public String getUrl() {
-       return url;
+    public void setID(int anid){
+    	this.id=anid;
     }
     
-    private String token;	
-	public void setToken(String token) {
-       this.token = token;
+	public void setToken(String tok) {
+		if (this.token == null){
+			this.token = tok;
+		}
     }
 
     public String getToken() {
        return token;
     }
     
-    private Date tokencreatedate;	
-	public void setTokenCreateDate() {
-       this.tokencreatedate = new Date(); 
-    }
-
-    public Date getTokenCreateDate() {
-       return tokencreatedate;
+    public void addCourse(JSONObject obj){
+    	courses.add(new Course(obj));
     }
     
-    private int selectedcourseid = 99999;	
-   	public void setSelectedCourseId(int selectedcourseid) {
-   	  this.selectedcourseid = selectedcourseid;
-   	}
-
-   	public int getSelectedCourseId() {
-      return selectedcourseid;
-   	}
-    
-    private SiteInfo siteinfo;	
-    public void setSiteInfo(SiteInfo siteinfo) {
-	   this.siteinfo = siteinfo; 
-	}
-    
-    public SiteInfo getSiteInfo() {
-       return siteinfo;
-    }
-    
-    private ArrayList<Course> courses = new ArrayList<Course>();	
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses; 
+    private ArrayList<Course> courses;	
+    public void setCourses(JSONObject obj) {
+    	courses = new ArrayList<Course>();
+		JSONArray jsoncourses;
+		try {
+			jsoncourses = obj.getJSONArray("courses");
+			for (int i=0;i<jsoncourses.length();i++){
+				JSONObject aCourse = new JSONObject(jsoncourses.getString(i));
+				courses.add(new Course(aCourse));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
      }
     
     public ArrayList<Course> getCourses() {
        return courses;
     }
     
-    public Course getCourse(int id) {
+    public Course getCourse(String aModuleCode) {
     	for (Course course : courses) { 
-		  if (course.getId() == id) { 
+		  if (course.getModuleCode() == aModuleCode) { 
 		    return course;  
 		  } 
 		} 
 		return null; // course not found. 
-    }
-    
-    /* everything below here is for implementing Parcelable */ 
-	 
-    // 99.9% of the time you can just ignore this 
-    public int describeContents() { 
-        return 0; 
-    } 
-    
- // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() { 
-        public User createFromParcel(Parcel in) { 
-            return new User(in); 
-        } 
- 
-        public User[] newArray(int size) { 
-            return new User[size]; 
-        } 
-    }; 
- 
-    // write your object's data to the passed-in Parcel 
-    public void writeToParcel(Parcel dest, int flags) { 
-    	dest.writeString(username); 
-    	dest.writeString(password);
-    	dest.writeString(url);
-    	dest.writeString(token);
-    	dest.writeLong(tokencreatedate.getTime());
-    	dest.writeInt(selectedcourseid);
-    	dest.writeParcelable(siteinfo, flags);
-    	dest.writeTypedList(courses); 
-    }
-    
-    private User(Parcel in) { 
-        this.username = in.readString(); 
-        this.password = in.readString();
-        this.url = in.readString();
-        this.token = in.readString();
-        this.tokencreatedate = new Date(in.readLong());
-        this.selectedcourseid = in.readInt();
-        this.siteinfo = in.readParcelable(SiteInfo.class.getClassLoader());
-        in.readTypedList(this.courses, Course.CREATOR); 
     }
 }

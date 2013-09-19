@@ -38,17 +38,6 @@ public class SiteInfo implements Parcelable {
 
 	}
 
-//	public static SiteInfo getInstance() {
-//		if (instance == null) {
-//			synchronized(SiteInfo.class) {
-//				if (instance == null) {
-//					instance = new SiteInfo();
-//				}
-//			}
-//		}
-//		return instance;
-//	}
-
 	private String sitename;	
 	public void setSiteName(String sitename) {
        this.sitename = sitename;

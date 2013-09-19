@@ -20,96 +20,80 @@
 
 package com.example.moodle;
 
-import java.util.ArrayList;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Course implements Parcelable {
-	//private static Course instance;
-
-	public Course() {
-
-	}
-
-//	public static Course getInstance() {
-//		if (instance == null) {
-//			synchronized(Course.class) {
-//				if (instance == null) {
-//					instance = new Course();
-//				}
-//			}
-//		}
-//		return instance;
-//	}
+public class Course {
 	
-	private int id;	
-	public void setId(int id) {
+	private String shortName, fullName, moduleCode, id;
+	
+	public Course(JSONObject aCourse) {
+		try {
+			id=aCourse.get("id").toString();
+			shortName=aCourse.get("shortname").toString();
+			fullName=aCourse.get("fullname").toString();
+			moduleCode=aCourse.get("idnumber").toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/*public void setId(int id) {
        this.id = id;
-    }
+    }*/
 
-    public int getId() {
+    public String getId() {
        return id;
     }
 
-	private String shortname;	
+	/*private String shortname;	
 	public void setShortName(String shortname) {
        this.shortname = shortname;
-    }
+    }*/
 
     public String getShortName() {
-       return shortname;
+       return shortName;
     }
 	    
-    private String fullname;	
+    /*private String fullname;	
 	public void setFullname(String fullname) {
        this.fullname = fullname;
-    }
+    }*/
 
     public String getFullname() {
-       return fullname;
+       return fullName;
     }
     
-    private int enrolledusercount;	
+    /*private int enrolledusercount;	
 	public void setEnrolledUserCount(int enrolledusercount) {
        this.enrolledusercount = enrolledusercount;
-    }
+    }*/
 
-    public int getEnrolledUserCount() {
+    /* int getEnrolledUserCount() {
        return enrolledusercount;
-    }
+    }*/
     
-    private String idnumber;	
+    /*private String idnumber;	
 	public void setIdNumber(String idnumber) {
        this.idnumber = idnumber;
-    }
+    }*/
 
-    public String getIdNumber() {
-       return idnumber;
+    public String getModuleCode() {
+       return moduleCode;
     }
     
-    private int visible;	
+    /*private int visible;	
 	public void setVisible(int visible) {
        this.visible = visible;
-    }
+    }*/
 
-    public int getVisible() {
+    /*public int getVisible() {
        return visible;
-    }
-    
-    private ArrayList<CourseContent> coursecontents = new ArrayList<CourseContent>();	
-	public void setCourseContent(ArrayList<CourseContent> coursecontents) {
-       this.coursecontents = coursecontents;
-    }
+    }*/
 
-    public ArrayList<CourseContent> getCourseContent() {
-       return coursecontents;
-    }
-
-    public void populateCourse(JSONObject jsonObject) {    
+    /*public void populateCourse(JSONObject jsonObject) {    
     	    	 
     	try {  
     		if (jsonObject != null) {
@@ -136,45 +120,9 @@ public class Course implements Parcelable {
     	} catch (JSONException e) { 
     	    e.printStackTrace(); 
     	}
-    }
+    }*/
     
-    /* everything below here is for implementing Parcelable */ 
-	 
-    // 99.9% of the time you can just ignore this 
-    public int describeContents() { 
-        return 0; 
-    } 
-    
- // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
-    public static final Parcelable.Creator<Course> CREATOR = new Parcelable.Creator<Course>() { 
-        public Course createFromParcel(Parcel in) { 
-            return new Course(in); 
-        } 
- 
-        public Course[] newArray(int size) { 
-            return new Course[size]; 
-        } 
-    }; 
- 
-    // write your object's data to the passed-in Parcel 
-    public void writeToParcel(Parcel dest, int flags) { 
-    	dest.writeInt(id);
-    	dest.writeString(shortname);
-    	dest.writeString(fullname);
-    	dest.writeInt(enrolledusercount);
-    	dest.writeString(idnumber);
-    	dest.writeInt(visible);
-    	dest.writeTypedList(coursecontents); 
-    }
-    
-    private Course(Parcel in) { 
-        this.id = in.readInt();
-        this.shortname = in.readString();
-        this.fullname = in.readString();
-        this.enrolledusercount = in.readInt();
-        this.idnumber = in.readString();
-        this.visible = in.readInt();
-        in.readTypedList(this.coursecontents, CourseContent.CREATOR); 
-    }
+
+
     
 }

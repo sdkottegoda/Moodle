@@ -18,6 +18,9 @@ import android.widget.Toast;
 import android.os.*;
 import java.io.*;
 
+import org.json.JSONObject;
+
+import com.example.moodle.App;
 import com.example.moodle.AppStatus;
 import com.example.moodle.Client;
 import com.example.moodle.R;
@@ -26,6 +29,7 @@ import com.example.moodle.User;
 import com.example.moodle.R.id;
 import com.example.moodle.R.layout;
 import com.example.moodle.R.menu;
+import com.example.moodle.UserHome;
 
 public class MainActivity extends Activity {
 	
@@ -46,7 +50,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
+        user = User.getInstance();
     	
     }
 
@@ -86,6 +91,19 @@ public class MainActivity extends Activity {
     	EditText eText2=(EditText) findViewById(R.id.password);
     	pwd=eText2.getText().toString();
     	
+    	
+    	//to be uncommented after adding a url textfield
+    	/*
+    	//Read the domain url and store it ass App.domainURL
+    	EditText eText3=(EditText) findViewById(R.id.domainurl);
+    	try{
+    		App.setDomainUrl(eText3.getText().toString());
+    	}
+    	catch(NullPointerException e){
+    		App.setDomainUrl("http://10.0.2.2/Moodle/moodle/");
+    	}*/
+    	
+    	
     	switch(v.getId())
 		{
 			case R.id.login_button:
@@ -122,15 +140,8 @@ public class MainActivity extends Activity {
         		}
         		
 				String siteUrlVal = "http://10.0.2.2/Moodle/moodle/";
-
-				System.out.print("token");
-				//checks for http:// entry
-				
-				/*if(!(siteUrlVal.substring(0, 7).toLowerCase().compareTo("http://")==0)) {
-					siteUrlVal = "http://"+siteUrlVal;
-					siteUrl.setText(siteUrlVal);
-				}*/
-				
+				App.setDomainUrl("http://10.0.2.2/Moodle/moodle/");
+				System.out.print("token");				
 				
 				String usrUri = Uri.encode(usr);
 				String pwdUri = Uri.encode(pwd);
@@ -155,53 +166,14 @@ public class MainActivity extends Activity {
 		        	
 
 					dialog.dismiss();
-		        	String serverurl = siteUrlVal + "/webservice/rest/server.php" + "?wstoken=" + token + "&wsfunction=";
 			        
-			        user = new User();
-			        user.setUsername(usr);
-			        user.setPassword(pwd);
+			        
 			        user.setToken(token);
-			        user.setTokenCreateDate();
-			        user.setUrl(url);
+			        getSiteInfo();
 			        
-			        Client client = new Client(serverurl);
-			        user.setHome(client.getUserHomeInfo());
-			        /*try{
-			        MoodleWebService webService = new MoodleWebService(MainActivity.this);
-			        SiteInfo siteInfo = new SiteInfo();
-			        webService.getSiteinfo(serverurl, siteInfo);
-			        user.setSiteInfo(siteInfo);
-			        ArrayList<Course> courses = new ArrayList<Course>();
-			        webService.getUserCourses(serverurl, siteInfo.getUserid(), courses);
+			        Intent nextPage =  new Intent(MainActivity.this, UserHomeActivity.class);
+					startActivity(nextPage);
 			        
-			        	
-			        if (courses.size() > 0) {		        	
-			        	for(int i = 0; i < courses.size(); i++) { 
-			    	        Course c = courses.get(i); 
-			    	        ArrayList<CourseContent> coursecontents = new ArrayList<CourseContent>();
-			    	        webService.getCourseContents(serverurl, c.getId(), coursecontents);
-			    	        
-			    	        if (coursecontents.size() > 0) {
-			    	        	c.setCourseContent(coursecontents);
-			    	        }
-			    	    } 
-			        	user.setCourses(courses);
-			        	*/
-			        	Intent nextPage =  new Intent(MainActivity.this, UserHomeActivity.class);
-						nextPage.putExtra("userObject", user); 
-						startActivity(nextPage);/*
-			        }
-			        else {
-			        	messageHandler.sendEmptyMessage(0);
-		        		
-			        	Log.e("Course Error", "User is not enrolled in any courses");
-			        	Toast.makeText(getApplicationContext(), "This User is not Enrolled in any Courses, please contact your Lecturer", Toast.LENGTH_LONG).show();
-			        	
-			        }
-			        }
-			        catch(Exception exc){
-			        	System.out.println(exc.getMessage());
-			        }*/
 			        System.out.println(token);
 		        } 
 		        else {
@@ -230,6 +202,8 @@ public class MainActivity extends Activity {
     	
 	}
     
+    
+    
     public Client getClient(){
 		return this.client;
 	}
@@ -242,8 +216,27 @@ public class MainActivity extends Activity {
 
 	    }
 	};
+	
+	//method to get details of user's homepage
+	public void getSiteInfo() {
 
-    	
-    }
+		client = Client.getInstance();
+		try{
+		//set the function name, the parameters and make the request 
+		String url ="http://10.0.2.2/Moodle/moodle//webservice/rest/server.php" + "?wstoken=" + user.getToken() + "&wsfunction=";			
+		JSONObject reply = client.makeRequest(user.getToken(),url, "moodle_webservice_get_siteinfo","","siteinfoxsl");
+		//fill details of the user and the home by processing the reply
+		UserHome.getInstance(reply);
+		user.setDetails(reply);
+		
+		}
+		catch(NullPointerException e){
+			System.out.println(user.getToken());
+		}
+		
+		
+		
+	}
+}
     
 
