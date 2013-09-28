@@ -23,7 +23,10 @@ package com.example.moodle;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Course {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Course implements Parcelable{
 	
 	private String shortName, fullName, moduleCode, id;
 	
@@ -83,6 +86,18 @@ public class Course {
     public String getModuleCode() {
        return moduleCode;
     }
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
     
     /*private int visible;	
 	public void setVisible(int visible) {

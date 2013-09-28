@@ -1,6 +1,9 @@
 package com.example.Activities;
 
+import com.example.Activities.UserHomeActivity.UserInfo;
+import com.example.moodle.App;
 import com.example.moodle.R;
+import com.example.moodle.User;
 import com.example.moodle.R.layout;
 import com.example.moodle.R.menu;
 
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
 
@@ -20,6 +24,52 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		//call the method to write user profile info
+		this.populateData();
+		
+		
+	}
+
+	//method to write the profile information by processing the intent as well as the user data
+	private void populateData() {
+		UserInfo info = (UserInfo)this.getIntent().getExtras().get("userInfo");
+		User user = User.getInstance();
+		String toBeWritten=info.getAddress();
+		if (toBeWritten!=null){
+			((TextView)this.findViewById(R.id.addressTextView)).setText("Address: "+toBeWritten);
+		}
+		toBeWritten = info.getCity();
+		if (toBeWritten!=null){
+			toBeWritten = "City: "+info.getCity();
+			if (info.getCountry()!=null){
+				toBeWritten = toBeWritten+info.getCountry();
+			}
+			((TextView)this.findViewById(R.id.cityCountryTextView)).setText("City: "+info.getCity()+", "+info.getCountry());
+		}
+		else{
+			toBeWritten = info.getCountry();
+			if (toBeWritten!=null){
+				((TextView)this.findViewById(R.id.cityCountryTextView)).setText("Country: "+toBeWritten);
+			}
+		}
+		toBeWritten = info.getEmail();
+		if (toBeWritten !=null){
+			((TextView)this.findViewById(R.id.emailTextView)).setText("Email address: "+toBeWritten);
+		}
+		toBeWritten = info.getIcq();
+		if (toBeWritten!=null){
+			((TextView)this.findViewById(R.id.icqTextView)).setText("ICQ: "+info.getIcq());
+		}
+		((TextView)this.findViewById(R.id.nameTextView)).setText("Name: "+user.getFullName());
+		toBeWritten = info.getPhones();
+		if (toBeWritten !=null){
+			((TextView)this.findViewById(R.id.phoneTextView)).setText("Contact numbers: "+info.getPhones());
+		}
+		toBeWritten = info.getCourses();
+		if (toBeWritten !=null){
+			((TextView)this.findViewById(R.id.coursesTextView)).setText("Courses enrolled: "+info.getCourses());
+		}
 	}
 
 	/**
@@ -54,6 +104,10 @@ public class ProfileActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public Bundle getData(){
+		return this.getIntent().getExtras();
 	}
 
 }

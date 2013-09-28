@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:text="@string/password_forgotten"
         android:textSize="20sp"
-        android:gravity="center"
+        android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#0000ff"	
         android:clickable="true"
@@ -128,4 +128,34 @@
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:onClick="login" />
+     
+     <LinearLayout
+         android:id="@+id/url_full"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/hdr_menu_view"
+         android:layout_marginLeft="10dp"
+         android:layout_marginTop="10dp"
+         android:orientation="horizontal"
+         android:textSize="20sp" >
+
+         <TextView
+             android:id="@+id/url_enter"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="left"
+             android:text="@string/enter_url"
+             android:textAppearance="?android:attr/textAppearanceMedium"
+             android:textColor="#000000" />
+
+         <AutoCompleteTextView
+             android:id="@+id/urlAutoCompleteTextView"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:gravity="left"
+             android:text="@string/default_url"
+             android:textSize="18sp" />
+     </LinearLayout>
+    
     </RelativeLayout>

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -139,8 +140,12 @@ public class MainActivity extends Activity {
         			System.out.println(e.getMessage());
         		}
         		
-				String siteUrlVal = "http://10.0.2.2/Moodle/moodle/";
-				App.setDomainUrl("http://10.0.2.2/Moodle/moodle/");
+				//String siteUrlVal = "http://10.0.2.2/Moodle/moodle/";
+				String domainUrl = ((AutoCompleteTextView)findViewById(R.id.urlAutoCompleteTextView)).getText().toString();
+        		if (!domainUrl.contains("http://")){
+        			domainUrl = "http://"+domainUrl;
+        		}
+				App.setDomainUrl(domainUrl);
 				System.out.print("token");				
 				
 				String usrUri = Uri.encode(usr);
@@ -150,14 +155,14 @@ public class MainActivity extends Activity {
 				saved = getSharedPreferences(loginDetails, MODE_PRIVATE);
 			
 				SharedPreferences.Editor e = saved.edit();
-				e.putString("siteUrlVal", siteUrlVal);
+				e.putString("siteUrlVal", App.getDomainURL());
 				e.putString("usr", usr);
 				e.putString("pwd", pwd);
 				e.commit();
 
 				
 				
-				String url = siteUrlVal + "/login/token.php?username=" + usrUri + "&password=" + pwdUri + "&service=moodle_mobile_app";
+				String url = App.getDomainURL() + "/login/token.php?username=" + usrUri + "&password=" + pwdUri + "&service=moodle_mobile_app";
 				TokenHttpRequest tokenRequest = new TokenHttpRequest();
 				String token = tokenRequest.doHTTPRequest(url); 
 		        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show(); 

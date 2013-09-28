@@ -23,5 +23,14 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="profile_hdr">My Profile</string>
     <string name="title_activity_course">CourseActivity</string>
+    <string name="profile_fullname">Name: </string>
+    <string name="profile_address">Address: </string>
+    <string name="profile_email">Email address: </string>
+    <string name="profile_phones">Contact numbers: </string>
+    <string name="profile_city_country">City</string>
+    <string name="profile_icq">ICQ: </string>
+    <string name="profile_courses">Enrolled courses: </string>
+    <string name="default_url">http://10.0.2.2/Moodle/moodle/</string>
+    <string name="enter_url">URL</string>
 
 </resources>

@@ -2,6 +2,9 @@ package com.example.Activities;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
+import com.example.moodle.Client;
 import com.example.moodle.R;
 import com.example.moodle.Course;
 import com.example.moodle.User;
@@ -65,7 +68,7 @@ public class CoursesActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				// TODO Auto-generated method stub
-				String course=(String) view.getItemAtPosition(position);
+				courseClicked(position);
 			
 			}
 		
@@ -98,8 +101,13 @@ public class CoursesActivity extends Activity {
 	
 	public void courseClicked(int position){
 		//String view = v.toString();
-		System.out.println(position);
+		//System.out.println(User.getInstance().getCourseAt(position).getFullname());
+		
+		
+		JSONObject courseContent = Client.getInstance().getCourseContent(position);
+		System.out.println(courseContent);
 		Intent nextPage =  new Intent(CoursesActivity.this, CourseActivity.class);
+		nextPage.putExtra("course", User.getInstance().getCourseAt(position));
 		startActivity(nextPage);
 	}
 

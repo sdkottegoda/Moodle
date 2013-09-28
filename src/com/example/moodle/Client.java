@@ -22,11 +22,14 @@ import javax.xml.transform.stream.StreamSource;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class Client extends AsyncTask<URL, Integer, Long>{
 
 	private static Client instance = null;
@@ -48,13 +51,6 @@ public class Client extends AsyncTask<URL, Integer, Long>{
 		
 	}
 	
-	public void getMyProfile(){
-		
-	}
-	
-	public void getMyCourses(){
-		
-	}
 		
 	public void getGrades(int aCourseid){
 		
@@ -150,6 +146,7 @@ public class Client extends AsyncTask<URL, Integer, Long>{
 	            response.append('\r');
 	        }
 	        rd.close();
+	        System.out.println(response.toString());
 	        return null;
 	        */
 	        Source xmlSource = new StreamSource(is); 
@@ -223,6 +220,25 @@ public class Client extends AsyncTask<URL, Integer, Long>{
 	public JSONObject getCourses(){
 		User user = User.getInstance();
 		return this.makeRequest(user.getToken(), App.getDomainURL(), "moodle_enrol_get_users_courses", "userid="+user.getId(), "coursesxsl");
+	}
+	
+	public JSONObject getCourseContent(int aPosition){
+		User user=User.getInstance();
+		Course course=user.getCourseAt(aPosition);
+		return this.makeRequest(user.getToken(), App.getDomainURL(), "core_course_get_contents", "courseid="+course.getId(), "contentxsl"); 
+	}
+	
+	public JSONObject getMyProfile(){
+		User user = User.getInstance();
+		JSONObject users = this.makeRequest(user.getToken(), App.getDomainURL(), "moodle_user_get_users_by_id", "userids[0]="+user.getId(), "profilexsl");
+		try {
+			String user0 = users.getJSONArray("users").getString(0);
+			return new JSONObject(user0);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

@@ -39,11 +39,11 @@ public class User{
 	private String firstName, lastName, fullName, pictureUrl, userName, token;
 	private int id;
 	private ArrayList<String> functions;
-	
+    private ArrayList<Course> courses;	
 	
 	//the user will only be created by the class
 	private User(){
-		
+    	courses = new ArrayList<Course>();
 	}
 	
 	public void setDetails(JSONObject obj){
@@ -115,13 +115,19 @@ public class User{
        return token;
     }
     
+    public Course getCourseAt(int aPosition){
+    	if (aPosition<this.courses.size()){
+    		return this.courses.get(aPosition);
+    	}
+    	else
+    		return null;
+    }
     public void addCourse(JSONObject obj){
+    	
     	courses.add(new Course(obj));
     }
     
-    private ArrayList<Course> courses;	
     public void setCourses(JSONObject obj) {
-    	courses = new ArrayList<Course>();
 		JSONArray jsoncourses;
 		try {
 			jsoncourses = obj.getJSONArray("courses");
