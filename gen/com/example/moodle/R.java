@@ -71,7 +71,8 @@ public final class R {
         public static final int activity_display_message=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_profile=0x7f030004;
-        public static final int activity_user_home=0x7f030005;
+        public static final int activity_resource=0x7f030005;
+        public static final int activity_user_home=0x7f030006;
     }
     public static final class menu {
         public static final int course=0x7f080000;
@@ -79,7 +80,8 @@ public final class R {
         public static final int display_message=0x7f080002;
         public static final int main=0x7f080003;
         public static final int profile=0x7f080004;
-        public static final int user_home=0x7f080005;
+        public static final int resource=0x7f080005;
+        public static final int user_home=0x7f080006;
     }
     public static final class raw {
         public static final int contentxsl=0x7f040000;
@@ -115,6 +117,7 @@ public final class R {
         public static final int title_activity_courses=0x7f060010;
         public static final int title_activity_display_message=0x7f060006;
         public static final int title_activity_profile=0x7f060013;
+        public static final int title_activity_resource=0x7f06001f;
         public static final int title_activity_user_home=0x7f06000f;
         public static final int title_activity_vxc=0x7f060004;
         public static final int url=0x7f06000d;

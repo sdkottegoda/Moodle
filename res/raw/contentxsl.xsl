@@ -8,7 +8,8 @@
 
 	<xsl:template match="node()">
 		<xsl:copy>
-			<xsl:text> { "contents": [</xsl:text>
+			<xsl:text> { </xsl:text>
+			<xsl:text>"coursecontents": [</xsl:text>
 			<xsl:for-each select="MULTIPLE/SINGLE">
         <xsl:text>{ </xsl:text>
         <xsl:for-each select="KEY">

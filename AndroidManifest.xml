@@ -33,7 +33,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.myfirstapp.MainActivity" />
-             >
+             >
         </activity>
         <activity
             android:name="com.example.Activities.UserHomeActivity"
@@ -62,6 +62,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.Activities.CoursesActivity" />
+        </activity>
+        <activity
+            android:name="com.example.Activities.ResourceActivity"
+            android:label="@string/title_activity_resource"
+            android:parentActivityName="com.example.Activities.CourseActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Activities.CourseActivity" />
         </activity>
     </application>
 

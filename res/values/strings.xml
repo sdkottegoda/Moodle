@@ -32,5 +32,6 @@
     <string name="profile_courses">Enrolled courses: </string>
     <string name="default_url">http://10.0.2.2/Moodle/moodle/</string>
     <string name="enter_url">URL</string>
+    <string name="title_activity_resource">ResourceActivity</string>
 
 </resources>
