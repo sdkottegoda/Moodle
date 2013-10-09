@@ -3,15 +3,213 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CourseActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+   <LinearLayout
+        android:id="@+id/course_home_hdr_menu_view"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:background="@drawable/navbar_shape"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+        
+        <TextView
+            android:id="@+id/course_home_hdr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/course_home_hdr"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginBottom="5dp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+		    android:textStyle="bold" />
+        
+    </LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/course_contents"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginTop="25dp"
+	    android:layout_below="@id/course_home_hdr_menu_view" >
+
+	    <ImageButton
+	        android:id="@+id/resources"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/veiw_proflie"
+	        android:onClick="resourcesClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/resource" />
+
+	    <ImageButton
+	        android:id="@+id/assignments"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:adjustViewBounds="true"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/view_courses"
+	        android:onClick="assignmentsClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/assignment" />
+	    
+	    <ImageButton
+	        android:id="@+id/forum"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/view_profile_settings"
+	        android:onClick="forumClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/forum" />
+	    
+	    <ImageButton
+	        android:id="@+id/grades"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/view_profile_settings"
+	        android:onClick="gradesClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/grades" />
+	    
+	    <ImageButton
+	        android:id="@+id/quizes"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/view_profile_settings"
+	        android:onClick="quizesClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/quizes" />
+	    
+	    <ImageButton
+	        android:id="@+id/choices"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_shape"
+	        android:clickable="true"
+	        android:contentDescription="@string/view_profile_settings"
+	        android:onClick="choicesClicked"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/choices" />
+
+	</LinearLayout>
+
+	<LinearLayout
+	    android:id="@+id/logged_in_as"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/course_home_hdr_menu_view"
+	    android:layout_marginRight="15dp"
+	    android:layout_marginTop="15dp" >
+
+	    <TextView
+	        android:id="@+id/user_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="right" />
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/resourcestextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignTop="@+id/course_contents"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginTop="25dp"
+	    android:layout_toRightOf="@+id/course_contents"
+	    android:text="@string/resources"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<TextView
+	    android:id="@+id/assignmentsTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/resourcestextView"
+	    android:layout_below="@+id/resourcestextView"
+	    android:layout_marginTop="35dp"
+	    android:text="@string/assignments"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<TextView
+	    android:id="@+id/forumTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/assignmentsTextView"
+	    android:layout_below="@+id/assignmentsTextView"
+	    android:layout_marginTop="36dp"
+	    android:text="@string/forum"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<TextView
+	    android:id="@+id/gradesTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/resourcestextView"
+	    android:layout_below="@+id/forumTextView"
+	    android:layout_marginTop="36dp"
+	    android:text="@string/grades"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<TextView
+	    android:id="@+id/quizesTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/resourcestextView"
+	    android:layout_below="@+id/gradesTextView"
+	    android:layout_marginTop="36dp"
+	    android:text="@string/quizes"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<TextView
+	    android:id="@+id/choicesTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/resourcestextView"
+	    android:layout_below="@+id/quizesTextView"
+	    android:layout_marginTop="36dp"
+	    android:text="@string/choices"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<TextView
+	    android:id="@+id/logouttextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/course_contents"
+	    android:layout_below="@+id/course_contents"
+	    android:layout_marginTop="20dp"
+	    android:text="@string/logout"
+	    android:clickable="true" />
+
+	<TextView
+	    android:id="@+id/logged_in"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignRight="@+id/logged_in_as"
+	    android:layout_below="@+id/course_home_hdr_menu_view"
+	    android:layout_marginTop="16dp"
+	    android:gravity="right"
+	    android:text="@string/home" />
+
+	
 
 </RelativeLayout>

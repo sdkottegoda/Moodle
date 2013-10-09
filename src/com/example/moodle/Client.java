@@ -252,11 +252,11 @@ public class Client {
 	public JSONObject getCourseContent(int aPosition){
 		User user=User.getInstance();
 		//Course course=user.getCourseAt(aPosition);
-		String url=App.getDomainURL()+"/webservice/rest/server.php?wstoken="+user.getToken()+"&wsfunction=core_course_get_contents";
-		//return this.makeRequest(user.getToken(), App.getDomainURL(), "core_course_get_contents", "courseid=3", "contentxsl"); 
-		HttpParams params=new BasicHttpParams();
-		params.setParameter("courseid", "3");
-		return this.sendRequest(url, params);
+		//String url=App.getDomainURL()+"/webservice/rest/server.php?wstoken="+user.getToken()+"&wsfunction=core_course_get_contents";
+		return this.makeRequest(user.getToken(), App.getDomainURL(), "core_course_get_contents", "courseid=3", "contentxsl"); 
+		//HttpParams params=new BasicHttpParams();
+		//params.setParameter("courseid", "3");
+		//return this.sendRequest(url, params);
 	}
 	
 	public JSONObject getMyProfile(){
@@ -326,7 +326,8 @@ public class Client {
 	        	endResult = myHandler.handleResponse(response);
 	        	System.out.println(endResult);
 	        	try {
-					obj = new JSONObject(endResult);
+					obj = XML.toJSONObject(endResult);
+					System.out.println(obj.toString());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

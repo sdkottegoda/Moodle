@@ -38,6 +38,12 @@
     <string name="view_courses">Vies my courses</string>
     <string name="logout">Logout</string>
     <string name="view_profile_settings">Profile settings</string>
-    
+    <string name="course_home_hdr">Course</string>
+    <string name="resources">Resources</string>
+    <string name="assignments">Assignments</string>
+    <string name="grades">Grades</string>
+    <string name="choices">Choices</string>
+    <string name="forum">Forum</string>
+    <string name="quizes">Quizzes</string>
 
 </resources>
