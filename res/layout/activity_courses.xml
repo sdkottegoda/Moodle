@@ -24,7 +24,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginBottom="5dp"
             android:textColor="#ffffff"
-            android:gravity="left"
+            android:gravity="center"
 		    android:textStyle="bold" />
         
     </LinearLayout>
@@ -45,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/courses_hdr_menu_view"  >
+            android:layout_below="@+id/courses_hdr_menu_view"
+            android:background="#fafafa" >
 
         </ListView>
 

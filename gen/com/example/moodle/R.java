@@ -24,18 +24,24 @@ public final class R {
         public static final int black_button=0x7f020000;
         public static final int button_shape=0x7f020001;
         public static final int courses=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int login_button=0x7f020004;
-        public static final int login_icon_default=0x7f020005;
-        public static final int login_icon_on=0x7f020006;
-        public static final int navbar_shape=0x7f020007;
-        public static final int profile=0x7f020008;
+        public static final int courses1=0x7f020003;
+        public static final int courses2=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int login_button=0x7f020006;
+        public static final int login_icon_default=0x7f020007;
+        public static final int login_icon_on=0x7f020008;
+        public static final int navbar_shape=0x7f020009;
+        public static final int profile=0x7f02000a;
+        public static final int profile1=0x7f02000b;
+        public static final int settings=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001f;
+        public static final int ViewCoursesTextView=0x7f090023;
+        public static final int ViewProfiletextView=0x7f090022;
+        public static final int action_settings=0x7f090026;
         public static final int addressTextView=0x7f090018;
         public static final int cityCountryTextView=0x7f090019;
-        public static final int courses=0x7f09001e;
+        public static final int courses=0x7f09001f;
         public static final int coursesListView=0x7f090002;
         public static final int coursesTextView=0x7f09001a;
         public static final int courses_hdr=0x7f090001;
@@ -43,9 +49,11 @@ public final class R {
         public static final int emailTextView=0x7f090017;
         public static final int guest_login_button=0x7f09000d;
         public static final int hdr_menu_view=0x7f090005;
+        public static final int home_hdr=0x7f09001c;
+        public static final int home_hdr_menu_view=0x7f09001b;
         public static final int icqTextView=0x7f090015;
         public static final int logged_in=0x7f090003;
-        public static final int logged_in_as=0x7f09001b;
+        public static final int logged_in_as=0x7f090021;
         public static final int login_button=0x7f09000c;
         public static final int login_details=0x7f090007;
         public static final int login_hdr=0x7f090006;
@@ -54,11 +62,14 @@ public final class R {
         public static final int password=0x7f090009;
         public static final int password_forgotten=0x7f09000b;
         public static final int phoneTextView=0x7f090016;
-        public static final int profile=0x7f09001d;
+        public static final int profile=0x7f09001e;
         public static final int profileImageView=0x7f090013;
-        public static final int profile_and_courses=0x7f09001c;
+        public static final int profile_and_courses=0x7f09001d;
         public static final int profile_hdr=0x7f090012;
         public static final int profile_hdr_menu_view=0x7f090011;
+        public static final int settings=0x7f090020;
+        public static final int textView1=0x7f090024;
+        public static final int textView2=0x7f090025;
         public static final int urlAutoCompleteTextView=0x7f090010;
         public static final int url_enter=0x7f09000f;
         public static final int url_full=0x7f09000e;
@@ -100,9 +111,11 @@ public final class R {
         public static final int guest_login=0x7f06000e;
         public static final int hello_world=0x7f060011;
         public static final int home=0x7f060005;
+        public static final int home_hdr=0x7f060020;
         public static final int login_button=0x7f060009;
         public static final int login_moodle_desc=0x7f060008;
         public static final int login_moodle_hdr=0x7f060007;
+        public static final int logout=0x7f060023;
         public static final int password=0x7f06000b;
         public static final int password_forgotten=0x7f06000c;
         public static final int profile_address=0x7f060017;
@@ -122,6 +135,9 @@ public final class R {
         public static final int title_activity_vxc=0x7f060004;
         public static final int url=0x7f06000d;
         public static final int user_name=0x7f06000a;
+        public static final int veiw_proflie=0x7f060021;
+        public static final int view_courses=0x7f060022;
+        public static final int view_profile_settings=0x7f060024;
     }
     public static final class style {
         /** 

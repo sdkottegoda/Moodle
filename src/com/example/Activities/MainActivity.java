@@ -163,8 +163,8 @@ public class MainActivity extends Activity {
 				
 				
 				String url = App.getDomainURL() + "/login/token.php?username=" + usrUri + "&password=" + pwdUri + "&service=moodle_mobile_app";
-				TokenHttpRequest tokenRequest = new TokenHttpRequest();
-				String token = tokenRequest.doHTTPRequest(url); 
+				//TokenHttpRequest tokenRequest = new TokenHttpRequest();
+				String token = Client.getInstance().doHTTPRequest(url); 
 		        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show(); 
 		        
 		        if (token != null && token != "") {

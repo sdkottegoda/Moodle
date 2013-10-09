@@ -91,6 +91,12 @@ public class UserHomeActivity extends Activity {
 		
 	}
 	
+	//This methos is called when the setting button is clicked
+	public void settingsClicked(View v){
+		//to be implemented
+	}
+	
+	
 	//This method is called when the profile button is clicked
 	public void profileClicked(View v){
 		

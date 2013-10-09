@@ -33,5 +33,11 @@
     <string name="default_url">http://10.0.2.2/Moodle/moodle/</string>
     <string name="enter_url">URL</string>
     <string name="title_activity_resource">ResourceActivity</string>
+    <string name="home_hdr">Home</string>
+    <string name="veiw_proflie">View my profile</string>
+    <string name="view_courses">Vies my courses</string>
+    <string name="logout">Logout</string>
+    <string name="view_profile_settings">Profile settings</string>
+    
 
 </resources>
